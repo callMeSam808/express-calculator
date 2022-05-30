@@ -6,6 +6,11 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true} ));
 
+app.listen(port, () => {
+  console.log(`Calculator listening on port ${port}`);
+});
+
+// Root, addition calculator
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
@@ -17,6 +22,15 @@ app.post('/', (req, res) => {
   res.send(`The result of the calculation is ${result}`);
 });
 
-app.listen(port, () => {
-  console.log(`Calculator listening on port ${port}`);
+
+// BMI calculator
+app.get('/bmiCalculator', (req, res) => {
+  res.sendFile(__dirname + '/bmiCalculator.html');
+});
+
+app.post('/bmiCalculator', (req, res) => {
+  let weight = Number(req.body.weight);
+  let height = Number(req.body.height);
+  let result = weight / (Math.pow(height, 2));
+  res.send(`Your BMI is ${result.toFixed(2)}.`);
 });
