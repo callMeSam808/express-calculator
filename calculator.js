@@ -10,6 +10,7 @@ app.listen(port, () => {
   console.log(`Calculator listening on port ${port}`);
 });
 
+
 // Root, addition calculator
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -29,8 +30,8 @@ app.get('/bmiCalculator', (req, res) => {
 });
 
 app.post('/bmiCalculator', (req, res) => {
-  let weight = Number(req.body.weight);
-  let height = Number(req.body.height);
+  let weight = parseFloat(req.body.weight);
+  let height = parseFloat(req.body.height);
   let result = weight / (Math.pow(height, 2));
   res.send(`Your BMI is ${result.toFixed(2)}.`);
 });
